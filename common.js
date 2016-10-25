@@ -1,8 +1,9 @@
-var imgSize = 20;
+var onePercent = 0.2;
+var imgSize = 20; 
 var zoomSize = document.getElementById('size');  
 var btnZoomPlus = document.getElementById('zoom_plus');
 var btnZoomMinus = document.getElementById('zoom_minus');
-var btnCreate = document.getElementById("create_mosaic");
+var btnCreate = document.getElementById('create_mosaic');
 var flag_ = false;
 var COF_PLUS = 1.25;
 var COF_MINUS = 0.8;
@@ -14,7 +15,7 @@ function CreateImg(i,j) {
 	if ((i%2 != 0)&&(j%2 != 0)) img.className = 'oddAll';
 	else if (i%2 != 0) img.className = 'oddRow';
 	else if (j%2 != 0) img.className = 'oddColumn';
-	var url = document.getElementById("url");
+	var url = document.getElementById('url');
 	img.src = url.value; 
 	return img;
 }
@@ -27,17 +28,17 @@ function resize(size) {
 }
 
 function zoom(cof) {
-	if ( imgSize*cof > 200 ) {
-		btnZoomPlus.setAttribute('disabled', "disabled");
-	    resize.call(this, 200);
+	if ( imgSize*cof > onePercent*1000 ) {
+		btnZoomPlus.setAttribute('disabled', 'disabled');
+	    resize.call(this, onePercent*1000);
 	    zoomSize.childNodes[0].textContent = '1000%';
 	    flag_ = true;
 	    return;
 	}
-	else if (imgSize*cof < 2) { 
-			btnZoomMinus.setAttribute('disabled', "disabled");
-			resize.call(this, 2);
-	    	zoomSize.childNodes[0].textContent = '10%';
+	else if (imgSize*cof < onePercent*10) { 
+			btnZoomMinus.setAttribute('disabled', 'disabled');
+			resize.call(this, onePercent*10);
+	    	zoomSize.childNodes[0].textContent ='10%';
 	    	flag_ = true;
 			return;
 		}
@@ -52,7 +53,7 @@ function zoom(cof) {
 				imgSize = imgSize*cof; 
 				resize.call(this, imgSize);
 			}
-			zoomSize.childNodes[0].textContent = Math.round(imgSize/0.2)+ '%';
+			zoomSize.childNodes[0].textContent = Math.round(imgSize/onePercent)+ '%';
 		}
 }
 
@@ -62,11 +63,12 @@ function validN(n) {
 }
 
 btnCreate.addEventListener("click", function() {
-	var n = document.getElementById("n");
-	if (!validN(n.value)) { alert('Empty field or not a number from 1 to 200.'); return;}
-	if (url.value == '') alert('Empty field');
 	var mosaic = document.getElementById("mosaic");
 	mosaic.innerHTML = '';
+	var n = document.getElementById("n");
+	if (!validN(n.value)) { alert('Empty field or not a number from 1 to 200.'); mosaic.innerHTML = ''; return;}
+	if (url.value == '') alert('Empty field');
+	
 	for (var i = 0; i < n.value; i++) {
 		var div = document.createElement('div');
 		mosaic.appendChild(div);
