@@ -1,0 +1,49 @@
+	img {
+		width: 20px;
+		height: 20px;
+		opacity: 1;
+		-webkit-transition-duration: 1s;
+	    -o-transition-duration: 1s;
+	    -moz-transition-duration: 1s;
+	    transition-duration: 1s;
+	}
+	div {
+		white-space: nowrap;
+		font-size: 0;
+		line-height: 0;
+	}
+	img:hover {
+		opacity: 0;
+	}
+	div#mosaic {
+		width: 500px;
+		height: 500px;
+		overflow: auto;
+		border: 1px solid #CCC;
+		margin: 30px auto;
+	}
+	.zoom, .date {
+		margin: 10px auto;
+		width: 500px;
+		text-align: center;
+		font-size: 14px;
+	}
+	#size {
+		font-size: 14px;
+	}
+	#n {
+		width: 50px;
+		margin-right: 10px;
+	}
+	#url {
+		width: 350px;
+	}
+	.oddRow {
+		transform: scaleY(-1);
+	}
+	.oddColumn {
+		transform: scaleX(-1);
+	}
+	.oddAll {
+		transform: scale(-1,-1);
+	}
